@@ -19,6 +19,9 @@ page('/:slug', function(context) {
   newMenuItem.classList.add('is-active');
   newPage.classList.add('is-active');
 
+  // Shift focus to header of the active content
+  newPage.getElementsByTagName("h2")[0].focus()
+
 });
 
 page({
