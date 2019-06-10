@@ -26,30 +26,40 @@
   RadioGroup.prototype.handleKeyDown = function(e) {
     switch(e.keyCode) {
 
-      case VK_UP:
+      case VK_UP: {
+
+          e.preventDefault();
+          // keeps focus on the same item
+          break;
+      }
       case VK_LEFT: {
 
         e.preventDefault();
-
-        // This seems like a good place to do some stuff :)
-
+        // keeps focus on the same item
         break;
-
       }
 
-      case VK_DOWN:
+      case VK_DOWN: {
+
+          e.preventDefault();
+          // Changes focus to the next radio button
+          // Using the RadioGroup changeFocus method
+          this.changeFocus(this.focusedIdx+1);
+
+          break;
+      }
       case VK_RIGHT: {
 
         e.preventDefault();
-
-        // This seems like a good place to do some stuff :)
+        // Changes focus to the next radio button
+        // Using the RadioGroup changeFocus method
+        this.changeFocus(this.focusedIdx+1);
 
         break;
       }
 
     }
 
-    this.changeFocus(this.focusedIdx); // <-- Hmm, interesting...
   };
 
   RadioGroup.prototype.changeFocus = function(idx) {
@@ -57,8 +67,19 @@
     this.focusedButton.tabIndex = -1;
     this.focusedButton.removeAttribute('checked');
 
+    console.log(this.focusedButton)
+
     // Set the new button to tabindex 0 and focus it
-    this.focusedButton = this.buttons[idx];
+    if(this.focusedIdx+1<this.buttons.length) {
+        this.focusedButton = this.buttons[idx];
+        this.focusedIdx++;
+    }
+    else {
+        this.focusedIdx = 0;
+        this.focusedButton = this.buttons[this.focusedIdx];
+        console.log(this.focusedButton)
+    }
+
     this.focusedButton.tabIndex = 0;
     this.focusedButton.focus();
     this.focusedButton.setAttribute('checked', 'checked');
