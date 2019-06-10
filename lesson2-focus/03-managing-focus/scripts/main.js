@@ -19,11 +19,18 @@ page('/:slug', function(context) {
   newMenuItem.classList.add('is-active');
   newPage.classList.add('is-active');
 
+  if(firstPage) {
+      firstPage = false;
+      return;
+  }
+
   // Shift focus to header of the active content
-  newPage.getElementsByTagName("h2")[0].focus()
+  newPage.getElementsByTagName("h2")[0].focus();
 
 });
 
 page({
   hashbang: true
 });
+
+firstPage = true;
