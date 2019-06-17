@@ -19,6 +19,7 @@
     this.buttons = slice(this.el.querySelectorAll('.radio'));
     this.focusedIdx = 0;
     this.focusedButton = this.buttons[this.focusedIdx];
+    this.el.setAttribute("role", "radiogroup")
 
     this.el.addEventListener('keydown', this.handleKeyDown.bind(this));
     this.el.addEventListener('click', this.handleClick.bind(this));
@@ -30,11 +31,14 @@
       if (firstButton) {
         button.tabIndex = "0";
         firstButton = false;
+        button.setAttribute("aria-checked", "true");
       } else {
         button.tabIndex = "-1";
+        button.setAttribute("aria-checked", "false");
       }
 
       // What about here?
+      button.setAttribute("role", "radio");
     }
 
   }
@@ -93,11 +97,15 @@
     this.focusedButton.tabIndex = -1;
     this.focusedButton.removeAttribute('checked');
 
+    this.focusedButton.setAttribute("aria-checked", "false");
+
     // Set the new button to tabindex 0 and focus it
     this.focusedButton = this.buttons[this.focusedIdx];
     this.focusedButton.tabIndex = 0;
     this.focusedButton.focus();
     this.focusedButton.setAttribute('checked', '');
+
+    this.focusedButton.setAttribute("aria-checked", "true");
 
     // ... we probably want to do some stuff here, too ...
 
