@@ -172,6 +172,11 @@
                 this.hide();
             } else {
                 // FIXME: ChromeVox reports the wrong list size and position
+                for(let i=0;i<this.visibleItems.length;i++) {
+                    let item = this.visibleItems[i]
+                    item.setAttribute("aria-posinset", 1+i);
+                    item.setAttribute("aria-setsize", this.visibleItems.length);
+                }
             }
         },
 
