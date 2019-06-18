@@ -76,12 +76,14 @@
             switch (e.keyCode) {
             case VK_DOWN:
                 if (!this.listbox.hidden) {
-                    this.listbox.nextActiveListItem();
+                    let curr = this.listbox.nextActiveListItem();
+                    this.setActiveDescendant(curr);
                 }
                 break;
             case VK_UP:
                 if (!this.listbox.hidden) {
-                    this.listbox.previousActiveListItem();
+                    let curr = this.listbox.previousActiveListItem();
+                    this.setActiveDescendant(curr);
                 }
                 break;
             case VK_ENTER:
@@ -213,6 +215,7 @@
             var newIdx = activeIdx;
             newIdx = (newIdx + 1) % this.visibleItems.length;
             this.changeActiveListitem(newIdx);
+            return this.activeItem;
         },
 
         previousActiveListItem: function() {
@@ -227,6 +230,7 @@
                 newIdx += this.visibleItems.length;
 
             this.changeActiveListitem(newIdx);
+            return this.activeItem;
         },
 
         changeActiveListitem: function(newIdx) {
