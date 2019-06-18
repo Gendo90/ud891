@@ -34,7 +34,8 @@ function openModal(e) {
   modal.style.display = 'block';
   modalOverlay.style.display = 'block';
 
-  // Focus first child
+  // Focus header
+  // document.getElementById("login").focus();
   firstTabStop.focus();
 
   function trapTabKey(e) {
@@ -64,6 +65,7 @@ function openModal(e) {
   }
 
   // FIXME: hide non-modal content from screen readers
+  document.querySelector(".wrapper").setAttribute("aria-hidden", "true")
 }
 
 function closeModal() {
@@ -75,4 +77,6 @@ function closeModal() {
   focusedElementBeforeModal.focus();
 
   // FIXME: don't forget to make main content screen reader accessible again.
+  document.querySelector(".wrapper").removeAttribute("aria-hidden")
+
 }
